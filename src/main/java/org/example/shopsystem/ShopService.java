@@ -1,19 +1,26 @@
 package org.example.shopsystem;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShopService implements Displayable {
 
     private final ProductRepo products;
-    private final OrderListRepo orders;
+    private final OrderRepoInterface orders;
 
-    public ShopService() {
+    public ShopService(@NotNull OrderRepoInterface orders) {
         products = new ProductRepo();
-        orders = new OrderListRepo();
+        this.orders = orders;
     }
 
-    public boolean placeOrder(String orderNumber, List<String> productIDs ) {
+    public boolean placeOrder(@NotNull String orderNumber, @NotNull List<String> productIDs ) {
+        if (orders.isUsedOrderNumber(orderNumber)) {
+            System.err.printf("Can't place order (number:%s): This order number is already in use.%n", orderNumber);
+            return false;
+        }
+
         List<Product> products = new ArrayList<>();
         for (String productID : productIDs) {
             Product product = this.products.getProduct(productID);
@@ -26,12 +33,11 @@ public class ShopService implements Displayable {
         if (products.isEmpty())
             return false;
 
-        orders.addOrder(new Order(orderNumber, products));
-        return true;
+        return orders.addOrder(new Order(orderNumber, products));
     }
 
     @Override
-    public void showContent(String indent) {
+    public void showContent(@NotNull String indent) {
         System.out.printf("%sShopService:", indent);
         products.showContent(indent+"    ");
         orders.showContent(indent+"    ");

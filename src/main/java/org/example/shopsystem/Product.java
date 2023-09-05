@@ -1,9 +1,11 @@
 package org.example.shopsystem;
 
-public record Product(String id, String name) implements Displayable {
+import org.jetbrains.annotations.NotNull;
+
+public record Product(@NotNull String id, @NotNull String name) implements Displayable {
 
     @Override
-    public void showContent(String indent) {
+    public void showContent(@NotNull String indent) {
         System.out.printf("%s[%s] \"%s\"%n", indent, id, name);
     }
 

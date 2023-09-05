@@ -1,5 +1,7 @@
 package org.example.shopsystem;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,17 +14,29 @@ public class OrderListRepo implements OrderRepoInterface {
     }
 
     @Override
-    public void addOrder(Order order ) {
-        orders.add(order);
+    public boolean isUsedOrderNumber(@NotNull String orderNumber) {
+        for (Order order : orders)
+            if (order!=null && orderNumber.equals(order.orderNumber()))
+                return true;
+        return false;
     }
 
     @Override
-    public boolean removeOrder(Order order ) {
+    public boolean addOrder(@NotNull Order order ) {
+        if (isUsedOrderNumber(order.orderNumber()))
+            return false;
+
+        orders.add(order);
+        return true;
+    }
+
+    @Override
+    public boolean removeOrder(@NotNull Order order ) {
         return orders.remove(order);
     }
 
     @Override
-    public void showContent(String indent) {
+    public void showContent(@NotNull String indent) {
         System.out.printf("%sOrderListRepo: [%d order(s)]%n", indent, orders.size());
         for (Order order : orders) {
             if (order==null)

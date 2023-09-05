@@ -1,6 +1,9 @@
 package org.example.shopsystem;
 
+import org.jetbrains.annotations.NotNull;
+
 public interface OrderRepoInterface extends Displayable {
-    void addOrder(Order order);
-    boolean removeOrder(Order order);
+    boolean addOrder(@NotNull Order order);
+    boolean removeOrder(@NotNull Order order);
+    boolean isUsedOrderNumber(@NotNull String orderNumber);
 }

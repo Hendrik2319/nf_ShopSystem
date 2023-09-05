@@ -1,11 +1,13 @@
 package org.example.shopsystem;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
-public record Order(String orderNumber, List<Product> products) implements Displayable {
+public record Order(@NotNull String orderNumber, @NotNull List<Product> products) implements Displayable {
 
     @Override
-    public void showContent(String indent) {
+    public void showContent(@NotNull String indent) {
         System.out.printf("%sOrder[%s]: [%d product(s)]", indent, orderNumber, products.size());
         for (Product product : products) {
             if (product==null)
