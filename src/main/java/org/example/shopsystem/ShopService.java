@@ -16,6 +16,18 @@ public class ShopService implements Displayable {
         this.testInterface = new TestInterface(this.products, this.orders);
     }
 
+    public String generateNewProductID() {
+        return products.generateNewProductID();
+    }
+
+    public boolean addProduct(@NotNull Product product) {
+        return products.addProduct(product);
+    }
+
+    public void showProducts() {
+        products.showContent();
+    }
+
     public boolean placeOrder(@NotNull String orderNumber, @NotNull List<String> productIDs ) {
         if (orders.isUsedOrderNumber(orderNumber)) {
             System.err.printf("Can't place order (number:%s): This order number is already in use.%n", orderNumber);

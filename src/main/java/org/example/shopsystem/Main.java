@@ -6,7 +6,13 @@ import java.util.function.Predicate;
 
 public class Main {
     public static void main(String[] args) {
+        //showSomeActions();
+        ShopService shopService = new ShopService(new OrderMapRepo());
+        new CommandLineInterface(shopService).start();
+    }
 
+    @SuppressWarnings({"unused", "UnusedAssignment"})
+    private static void showSomeActions() {
         ShopService shopService = new ShopService(new OrderMapRepo());
         //ShopService shopService = new ShopService(new OrderListRepo());
         shopService.showContent();
@@ -16,10 +22,10 @@ public class Main {
         OrderRepoInterface orders = shopService.testInterface.orders();
 
         String prodId2, prodId1, prodId3, prodId4;
-        showAction("Add \"Product 1\"", products.addProduct(new Product(prodId1 = products.generateNewProductID(), "Product 1",  12_50)));
-        showAction("Add \"Product 2\"", products.addProduct(new Product(prodId2 = products.generateNewProductID(), "Product 2",   3_00)));
-        showAction("Add \"Product 3\"", products.addProduct(new Product(prodId3 = products.generateNewProductID(), "Product 3",     50)));
-        showAction("Add \"Product 4\"", products.addProduct(new Product(prodId4 = products.generateNewProductID(), "Product 4", 500_00)));
+        showAction("Add \"Product 1\"", shopService.addProduct(new Product(prodId1 = shopService.generateNewProductID(), "Product 1",  12_50)));
+        showAction("Add \"Product 2\"", shopService.addProduct(new Product(prodId2 = shopService.generateNewProductID(), "Product 2",   3_00)));
+        showAction("Add \"Product 3\"", shopService.addProduct(new Product(prodId3 = shopService.generateNewProductID(), "Product 3",     50)));
+        showAction("Add \"Product 4\"", shopService.addProduct(new Product(prodId4 = shopService.generateNewProductID(), "Product 4", 500_00)));
 
         String orderNo1, orderNo2, orderNo3;
         showAction("[O1] Place Order (Product 1, Product 3)", shopService.placeOrder(orderNo1 = orders.generateNewOrderNumber(), List.of(prodId1, prodId3)));

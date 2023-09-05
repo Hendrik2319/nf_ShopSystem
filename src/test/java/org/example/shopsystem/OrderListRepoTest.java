@@ -1,11 +1,11 @@
 package org.example.shopsystem;
 
-import org.assertj.core.description.TextDescription;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
-import static org.assertj.core.api.Assertions.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class OrderListRepoTest {
 
