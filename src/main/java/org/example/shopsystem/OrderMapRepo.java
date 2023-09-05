@@ -29,6 +29,11 @@ public class OrderMapRepo implements OrderRepoInterface {
     }
 
     @Override
+    public Order getOrder(@NotNull String orderNumber) {
+        return orders.get(orderNumber);
+    }
+
+    @Override
     public boolean removeOrder(@NotNull Order order) {
         Order removed = orders.remove(order.orderNumber());
         return removed!=null;

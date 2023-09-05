@@ -16,17 +16,21 @@ public class Main {
         OrderRepoInterface orders = shopService.testInterface.orders();
 
         String prodId2, prodId1, prodId3, prodId4;
-        showAction("Add \"Product 1\"", products.addProduct(new Product(prodId1 = products.generateNewProductID(), "Product 1")));
-        showAction("Add \"Product 2\"", products.addProduct(new Product(prodId2 = products.generateNewProductID(), "Product 2")));
-        showAction("Add \"Product 3\"", products.addProduct(new Product(prodId3 = products.generateNewProductID(), "Product 3")));
-        showAction("Add \"Product 4\"", products.addProduct(new Product(prodId4 = products.generateNewProductID(), "Product 4")));
+        showAction("Add \"Product 1\"", products.addProduct(new Product(prodId1 = products.generateNewProductID(), "Product 1",  12_50)));
+        showAction("Add \"Product 2\"", products.addProduct(new Product(prodId2 = products.generateNewProductID(), "Product 2",   3_00)));
+        showAction("Add \"Product 3\"", products.addProduct(new Product(prodId3 = products.generateNewProductID(), "Product 3",     50)));
+        showAction("Add \"Product 4\"", products.addProduct(new Product(prodId4 = products.generateNewProductID(), "Product 4", 500_00)));
 
-        showAction("Place Order (Product 1, Product 3)", shopService.placeOrder(orders.generateNewOrderNumber(), List.of(prodId1, prodId3)));
-        showAction("Place Order (2x Product 3)"        , shopService.placeOrder(orders.generateNewOrderNumber(), List.of(prodId3, prodId3)));
-        showAction("Place Order (Product 1,2 & 4)"     , shopService.placeOrder(orders.generateNewOrderNumber(), List.of(prodId1, prodId2, prodId4)));
+        String orderNo1, orderNo2, orderNo3;
+        showAction("[O1] Place Order (Product 1, Product 3)", shopService.placeOrder(orderNo1 = orders.generateNewOrderNumber(), List.of(prodId1, prodId3)));
+        showAction("[O2] Place Order (3x Product 3)"        , shopService.placeOrder(orderNo2 = orders.generateNewOrderNumber(), List.of(prodId3, prodId3, prodId3)));
+        showAction("[O3] Place Order (Product 1,2,4)"       , shopService.placeOrder(orderNo3 = orders.generateNewOrderNumber(), List.of(prodId1, prodId2, prodId4)));
         shopService.showContent();
         System.out.println();
 
+        showAction("Remove 2x \"Product 3\" from order 2 [O2]", orders.getOrder(orderNo2).removeProduct(products.getProduct(prodId3), 2));
+        shopService.showContent();
+        System.out.println();
     }
 
     private static void showAction(String label, boolean success) {

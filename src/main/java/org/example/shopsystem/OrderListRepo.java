@@ -31,6 +31,14 @@ public class OrderListRepo implements OrderRepoInterface {
     }
 
     @Override
+    public Order getOrder(@NotNull String orderNumber) {
+        for (Order order : orders)
+            if (order!=null && orderNumber.equals(order.orderNumber()))
+                return order;
+        return null;
+    }
+
+    @Override
     public boolean removeOrder(@NotNull Order order ) {
         return orders.remove(order);
     }

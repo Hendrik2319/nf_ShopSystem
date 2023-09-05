@@ -2,7 +2,6 @@ package org.example.shopsystem;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ShopService implements Displayable {
@@ -23,19 +22,19 @@ public class ShopService implements Displayable {
             return false;
         }
 
-        List<Product> products = new ArrayList<>();
+        Order order = new Order(orderNumber);
         for (String productID : productIDs) {
             Product product = this.products.getProduct(productID);
             if (product==null) {
                 System.err.printf("Can't add product (ID:%s) to order: Unknown product ID%n", productID);
                 continue;
             }
-            products.add(product);
+            order.addProduct(product);
         }
-        if (products.isEmpty())
+        if (order.isEmpty())
             return false;
 
-        return orders.addOrder(new Order(orderNumber, products));
+        return orders.addOrder(order);
     }
 
     @Override
