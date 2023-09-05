@@ -9,10 +9,12 @@ public class ShopService implements Displayable {
 
     private final ProductRepo products;
     private final OrderRepoInterface orders;
+    final TestInterface testInterface;
 
     public ShopService(@NotNull OrderRepoInterface orders) {
         products = new ProductRepo();
         this.orders = orders;
+        this.testInterface = new TestInterface(this.products, this.orders);
     }
 
     public boolean placeOrder(@NotNull String orderNumber, @NotNull List<String> productIDs ) {
@@ -38,7 +40,7 @@ public class ShopService implements Displayable {
 
     @Override
     public void showContent(@NotNull String indent) {
-        System.out.printf("%sShopService:", indent);
+        System.out.printf("%sShopService:%n", indent);
         products.showContent(indent+"    ");
         orders.showContent(indent+"    ");
     }
@@ -49,5 +51,8 @@ public class ShopService implements Displayable {
                 "products=" + products +
                 ", orders=" + orders +
                 '}';
+    }
+
+    public record TestInterface(ProductRepo products, OrderRepoInterface orders) {
     }
 }

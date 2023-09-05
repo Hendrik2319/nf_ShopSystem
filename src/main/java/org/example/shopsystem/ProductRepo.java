@@ -14,6 +14,10 @@ public class ProductRepo implements Displayable {
         this.products = new HashMap<>();
     }
 
+    public String generateNewProductID() {
+        return Main.generateNewID(10,true,true, products::containsKey);
+    }
+
     public Product getProduct(@NotNull String productID ) {
         return products.get(productID);
     }
