@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public record Order(@NotNull String orderNumber, @NotNull Map<Product,Integer> products) implements Displayable {
@@ -52,7 +53,7 @@ public record Order(@NotNull String orderNumber, @NotNull Map<Product,Integer> p
     @Override
     public void showContent(@NotNull String indent) {
         System.out.printf("%sOrder[%s]: [%d product(s)]%n", indent, orderNumber, products.size());
-        System.out.printf("%s    Total Price: %1.2f €%n", indent, getTotalPrice()/100.0);
+        System.out.printf(Locale.ENGLISH, "%s    Total Price: %1.2f €%n", indent, getTotalPrice()/100.0);
         List<Product> productlist = products.keySet().stream().sorted(Comparator.comparing(Product::id)).toList();
         for (Product product : productlist) {
             Integer n = products.get(product);

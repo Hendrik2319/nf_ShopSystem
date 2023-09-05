@@ -5,25 +5,25 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-class CLIMenu {
+class CLIMenu<ReturnValue> {
 
     private final String label;
-    private final List<MenuItem> menuItems;
+    private final List<MenuItem<ReturnValue>> menuItems;
 
     CLIMenu(String label) {
         this.label = label;
         menuItems = new ArrayList<>();
     }
 
-    void add(String label, MenuAction action) {
-        menuItems.add(new MenuItem(label, action));
+    void add(String label, MenuAction<ReturnValue> action) {
+        menuItems.add(new MenuItem<>(label, action));
     }
 
     private void print() {
         System.out.printf("Menu \"%s\"%n", label);
 
         for (int i = 0; i < menuItems.size(); i++) {
-            MenuItem menuItem = menuItems.get(i);
+            MenuItem<ReturnValue> menuItem = menuItems.get(i);
             System.out.printf("   [%d] %s%n", i + 1, menuItem.label);
         }
     }
@@ -45,7 +45,7 @@ class CLIMenu {
         return choice - 1; // displayed indexes are 1 higher than list indexes
     }
 
-    CLIMenu show() {
+    ReturnValue show() {
         print();
         int choice = askUser();
         return menuItems.get(choice).action().perform();
@@ -55,10 +55,10 @@ class CLIMenu {
         menuItems.clear();
     }
 
-    interface MenuAction {
-        CLIMenu perform();
+    interface MenuAction<ReturnValue> {
+        ReturnValue perform();
     }
 
-    private record MenuItem(String label, MenuAction action) {
+    private record MenuItem<ReturnValue>(String label, MenuAction<ReturnValue> action) {
     }
 }

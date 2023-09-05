@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public class OrderMapRepo implements OrderRepoInterface {
 
@@ -17,6 +18,11 @@ public class OrderMapRepo implements OrderRepoInterface {
     }
 
     record TestInterface(Map<String, Order> orders) {}
+
+    @Override
+    public void foreach(Consumer<Order> action) {
+        orders.values().forEach(action);
+    }
 
     @Override
     public boolean isUsedOrderNumber(@NotNull String orderNumber) {

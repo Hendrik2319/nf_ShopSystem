@@ -3,6 +3,7 @@ package org.example.shopsystem;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class ShopService implements Displayable {
 
@@ -24,8 +25,26 @@ public class ShopService implements Displayable {
         return products.addProduct(product);
     }
 
+    public String addEmptyOrder() {
+        String newOrderNumber = orders.generateNewOrderNumber();
+        orders.addOrder(new Order(newOrderNumber));
+        return newOrderNumber;
+    }
+
     public void showProducts() {
         products.showContent();
+    }
+
+    public void showOrders() {
+        orders.showContent();
+    }
+
+    public void foreachProduct(Consumer<Product> action) {
+        products.foreach(action);
+    }
+
+    public void foreachOrder(Consumer<Order> action) {
+        orders.foreach(action);
     }
 
     public boolean placeOrder(@NotNull String orderNumber, @NotNull List<String> productIDs ) {

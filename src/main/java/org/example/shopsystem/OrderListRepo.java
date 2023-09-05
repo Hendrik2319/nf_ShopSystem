@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class OrderListRepo implements OrderRepoInterface {
 
@@ -16,6 +17,11 @@ public class OrderListRepo implements OrderRepoInterface {
     }
 
     record TestInterface(List<Order> orders) {}
+
+    @Override
+    public void foreach(Consumer<Order> action) {
+        orders.forEach(action);
+    }
 
     @Override
     public boolean isUsedOrderNumber(@NotNull String orderNumber) {
