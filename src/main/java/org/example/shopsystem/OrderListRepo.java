@@ -3,7 +3,7 @@ package org.example.shopsystem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderListRepo {
+public class OrderListRepo implements OrderRepoInterface {
 
     private final List<Order> orders;
 
@@ -11,16 +11,19 @@ public class OrderListRepo {
         this.orders = new ArrayList<>();
     }
 
-    public void addOrder( Order order ) {
+    @Override
+    public void addOrder(Order order ) {
         orders.add(order);
     }
 
+    @Override
     public boolean removeOrder(Order order ) {
         return orders.remove(order);
     }
 
+    @Override
     public void showContent(String indent) {
-        System.out.printf("%sOrderListRepo: [%d]%n", indent, orders.size());
+        System.out.printf("%sOrderListRepo: [%d order(s)]%n", indent, orders.size());
         for (Order order : orders) {
             if (order==null)
                 System.out.printf("%s    <NULL>%n", indent);

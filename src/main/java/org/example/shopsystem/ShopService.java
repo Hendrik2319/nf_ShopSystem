@@ -3,7 +3,7 @@ package org.example.shopsystem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopService {
+public class ShopService implements Displayable {
 
     private final ProductRepo products;
     private final OrderListRepo orders;
@@ -13,7 +13,7 @@ public class ShopService {
         orders = new OrderListRepo();
     }
 
-    public boolean placeOrder(List<String> productIDs ) {
+    public boolean placeOrder(String orderNumber, List<String> productIDs ) {
         List<Product> products = new ArrayList<>();
         for (String productID : productIDs) {
             Product product = this.products.getProduct(productID);
@@ -26,10 +26,11 @@ public class ShopService {
         if (products.isEmpty())
             return false;
 
-        orders.addOrder(new Order(products));
+        orders.addOrder(new Order(orderNumber, products));
         return true;
     }
 
+    @Override
     public void showContent(String indent) {
         System.out.printf("%sShopService:", indent);
         products.showContent(indent+"    ");

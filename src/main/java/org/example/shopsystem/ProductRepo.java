@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ProductRepo {
+public class ProductRepo implements Displayable {
 
     private final Map<String, Product> products;
 
@@ -27,8 +27,9 @@ public class ProductRepo {
         return products.remove(productID);
     }
 
+    @Override
     public void showContent(String indent) {
-        System.out.printf("%sProductRepo: [%d]%n", indent, products.size());
+        System.out.printf("%sProductRepo: [%d product(s)]%n", indent, products.size());
         List<Product> productlist = products.keySet().stream().sorted().map(products::get).toList();
         for (Product product : productlist) {
             if (product==null)
