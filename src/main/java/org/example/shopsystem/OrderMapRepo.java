@@ -9,10 +9,14 @@ import java.util.Map;
 public class OrderMapRepo implements OrderRepoInterface {
 
     private final Map<String, Order> orders;
+    final TestInterface testInterface;
 
     public OrderMapRepo() {
         this.orders = new HashMap<>();
+        this.testInterface = new TestInterface(orders);
     }
+
+    record TestInterface(Map<String, Order> orders) {}
 
     @Override
     public boolean isUsedOrderNumber(@NotNull String orderNumber) {

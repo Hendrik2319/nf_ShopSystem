@@ -8,10 +8,14 @@ import java.util.List;
 public class OrderListRepo implements OrderRepoInterface {
 
     private final List<Order> orders;
+    final TestInterface testInterface;
 
     public OrderListRepo() {
         this.orders = new ArrayList<>();
+        this.testInterface = new TestInterface(orders);
     }
+
+    record TestInterface(List<Order> orders) {}
 
     @Override
     public boolean isUsedOrderNumber(@NotNull String orderNumber) {
