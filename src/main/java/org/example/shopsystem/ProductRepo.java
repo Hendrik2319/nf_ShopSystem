@@ -27,14 +27,14 @@ public class ProductRepo {
         return products.remove(productID);
     }
 
-    public void showContent() {
-        System.out.printf("ProductRepo: [%d]%n", products.size());
+    public void showContent(String indent) {
+        System.out.printf("%sProductRepo: [%d]%n", indent, products.size());
         List<Product> productlist = products.keySet().stream().sorted().map(products::get).toList();
         for (Product product : productlist) {
             if (product==null)
-                System.out.println("    <NULL>");
+                System.out.printf("%s    <NULL>%n", indent);
             else
-                product.showContent("    ");
+                product.showContent(indent+"    ");
         }
     }
 

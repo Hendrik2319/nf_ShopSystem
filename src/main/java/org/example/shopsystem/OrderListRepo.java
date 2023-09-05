@@ -19,13 +19,13 @@ public class OrderListRepo {
         return orders.remove(order);
     }
 
-    public void showContent() {
-        System.out.printf("OrderListRepo: [%d]%n", orders.size());
+    public void showContent(String indent) {
+        System.out.printf("%sOrderListRepo: [%d]%n", indent, orders.size());
         for (Order order : orders) {
             if (order==null)
-                System.out.println("    <NULL>");
+                System.out.printf("%s    <NULL>%n", indent);
             else
-                order.showContent("    ");
+                order.showContent(indent+"    ");
         }
     }
 
