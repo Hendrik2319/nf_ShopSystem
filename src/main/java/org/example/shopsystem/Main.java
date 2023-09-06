@@ -7,8 +7,11 @@ import java.util.function.Predicate;
 public class Main {
     public static void main(String[] args) {
         //showSomeActions();
-        ShopService shopService = new ShopService(new OrderMapRepo());
-        new CommandLineInterface(shopService).start();
+
+        //ShopService shopService = new ShopService(new OrderMapRepo());
+        //new CommandLineInterface(shopService).start();
+
+        TextColor.testValues();
     }
 
     @SuppressWarnings({"unused", "UnusedAssignment"})
