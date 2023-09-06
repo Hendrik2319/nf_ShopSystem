@@ -21,6 +21,10 @@ public class ShopService implements Displayable {
         return products.generateNewProductID();
     }
 
+    public String generateNewOrderNumber() {
+        return orders.generateNewOrderNumber();
+    }
+
     public boolean addProduct(@NotNull Product product) {
         return products.addProduct(product);
     }
@@ -29,6 +33,10 @@ public class ShopService implements Displayable {
         String newOrderNumber = orders.generateNewOrderNumber();
         orders.addOrder(new Order(newOrderNumber));
         return newOrderNumber;
+    }
+
+    public boolean removeOrder( Order order ) {
+        return orders.removeOrder(order);
     }
 
     public void showProducts() {

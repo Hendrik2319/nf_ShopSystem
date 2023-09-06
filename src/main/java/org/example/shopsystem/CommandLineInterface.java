@@ -1,5 +1,6 @@
 package org.example.shopsystem;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -34,17 +35,43 @@ public class CommandLineInterface {
             nextMenu = nextMenu.show();
     }
 
+    static void printHR() {
+        System.out.println("-------------------------------------------------------------------");
+    }
+
     private void fillMainMenu() {
         mainMenu.clear();
 
         mainMenu.add("Quit", ()->{
-            System.out.println("Quit application");
+            printHR();
+            System.out.println("Application stopped");
+            printHR();
             return null;
         });
 
         mainMenu.add("Show Shop", ()->{
+            printHR();
             shopService.showContent();
             System.out.println();
+            return mainMenu;
+        });
+
+        mainMenu.add("Fill Shop with test values", ()->{
+            printHR();
+
+            String prodId2, prodId1, prodId3, prodId4;
+            shopService.addProduct(new Product(prodId1 = shopService.generateNewProductID(), "Product 1",  12_50));
+            shopService.addProduct(new Product(prodId2 = shopService.generateNewProductID(), "Product 2",   3_00));
+            shopService.addProduct(new Product(prodId3 = shopService.generateNewProductID(), "Product 3",     50));
+            shopService.addProduct(new Product(prodId4 = shopService.generateNewProductID(), "Product 4", 500_00));
+
+            shopService.placeOrder(shopService.generateNewOrderNumber(), List.of(prodId1, prodId3));
+            shopService.placeOrder(shopService.generateNewOrderNumber(), List.of(prodId3, prodId3, prodId3));
+            shopService.placeOrder(shopService.generateNewOrderNumber(), List.of(prodId1, prodId2, prodId4));
+
+            shopService.showContent();
+            System.out.println();
+
             return mainMenu;
         });
 
@@ -58,16 +85,29 @@ public class CommandLineInterface {
         orderMenu.add("Return to Main Menu", ()->mainMenu);
 
         orderMenu.add("Show Orders", ()-> {
+            printHR();
             shopService.showOrders();
             System.out.println();
             return orderMenu;
         });
 
         orderMenu.add("Create new empty Order", ()->{
+            printHR();
             String orderNumber = shopService.addEmptyOrder();
             System.out.printf("Created new empty order with ID \"%s\"%n", orderNumber);
 
             System.out.println();
+            return orderMenu;
+        });
+
+        orderMenu.add("Remove order", ()->{
+            Order order = selectOrder();
+            if (order==null) return orderMenu;
+
+            boolean removed = shopService.removeOrder(order);
+            System.out.printf("Order \"%s\" %sremoved%n", order.orderNumber(), removed ? "" : "NOT ");
+            System.out.println();
+
             return orderMenu;
         });
 
@@ -107,12 +147,14 @@ public class CommandLineInterface {
         productMenu.add("Return to Main Menu", ()->mainMenu);
 
         productMenu.add("Show Products", ()-> {
+            printHR();
             shopService.showProducts();
             System.out.println();
             return productMenu;
         });
 
         productMenu.add("Add Product", ()->{
+            printHR();
             System.out.println("New Product");
 
             String newProductID = shopService.generateNewProductID();
@@ -131,10 +173,12 @@ public class CommandLineInterface {
         });
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static String getStringInput(String prompt, String cancelValue) {
         return getInput(prompt, cancelValue, str->true, Scanner::next);
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static Integer getIntInput(String prompt, String cancelValue, Predicate<Integer> isOk) {
         return getInput(prompt, cancelValue, isOk, sc -> {
             try { return sc.nextInt(); }

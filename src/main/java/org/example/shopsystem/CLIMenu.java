@@ -5,6 +5,8 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import static org.example.shopsystem.CommandLineInterface.printHR;
+
 class CLIMenu<ReturnValue> {
 
     private final String label;
@@ -20,6 +22,7 @@ class CLIMenu<ReturnValue> {
     }
 
     private void print() {
+        printHR();
         System.out.printf("Menu \"%s\"%n", label);
 
         for (int i = 0; i < menuItems.size(); i++) {
@@ -31,7 +34,7 @@ class CLIMenu<ReturnValue> {
     private int askUser() {
         int choice = -1;
         while (choice <= 0 || choice > menuItems.size()) {
-            System.out.print("Enter your choice: ");
+            System.out.printf("Enter your choice [1..%d]: ", menuItems.size());
             Scanner sc = new Scanner(System.in);
             try {
                 choice = sc.nextInt();
