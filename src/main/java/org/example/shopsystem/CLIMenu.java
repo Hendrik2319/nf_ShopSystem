@@ -9,6 +9,9 @@ import static org.example.shopsystem.CommandLineInterface.printHR;
 
 class CLIMenu<ReturnValue> {
 
+    public static final TextColor COLOR_CHOICE = TextColor.TEXT_LIGHT_GREEN;
+    public static final TextColor COLOR_MENU_LABEL = TextColor.TEXT_LIGHT_YELLOW;
+    public static final TextColor RESET = TextColor.RESET;
     private final String label;
     private final List<MenuItem<ReturnValue>> menuItems;
 
@@ -23,18 +26,18 @@ class CLIMenu<ReturnValue> {
 
     private void print() {
         printHR();
-        System.out.printf("Menu \"%s\"%n", label);
+        System.out.printf("Menu %s%s%s%n", COLOR_MENU_LABEL, label, RESET);
 
         for (int i = 0; i < menuItems.size(); i++) {
             MenuItem<ReturnValue> menuItem = menuItems.get(i);
-            System.out.printf("   [%d] %s%n", i + 1, menuItem.label);
+            System.out.printf("   [%s%d%s] %s%n", COLOR_CHOICE, i+1, RESET, menuItem.label);
         }
     }
 
     private int askUser() {
         int choice = -1;
         while (choice <= 0 || choice > menuItems.size()) {
-            System.out.printf("Enter your choice [1..%d]: ", menuItems.size());
+            System.out.printf("Enter your choice [%s1%s..%s%d%s]: ", COLOR_CHOICE, RESET, COLOR_CHOICE, menuItems.size(), RESET);
             Scanner sc = new Scanner(System.in);
             try {
                 choice = sc.nextInt();
@@ -42,7 +45,7 @@ class CLIMenu<ReturnValue> {
                 choice = -1;
             }
         }
-        System.out.printf("Your choice: %d%n", choice);
+        //System.out.printf("Your choice: %s%d%s%n", COLOR_CHOICE, choice, RESET);
         System.out.println();
 
         return choice - 1; // displayed indexes are 1 higher than list indexes

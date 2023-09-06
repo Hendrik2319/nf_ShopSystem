@@ -39,10 +39,14 @@ public class CommandLineInterface {
         System.out.println("-------------------------------------------------------------------");
     }
 
+    private static String makeReturnLabel(String str) {
+        return TextColor.TEXT_LIGHT_BLUE + str + TextColor.RESET;
+    }
+
     private void fillMainMenu() {
         mainMenu.clear();
 
-        mainMenu.add("Quit", ()->{
+        mainMenu.add( makeReturnLabel("Quit"), ()->{
             printHR();
             System.out.println("Application stopped");
             printHR();
@@ -82,7 +86,7 @@ public class CommandLineInterface {
     private void fillOrderMenu() {
         orderMenu.clear();
 
-        orderMenu.add("Return to Main Menu", ()->mainMenu);
+        orderMenu.add(makeReturnLabel("Return to Main Menu"), ()->mainMenu);
 
         orderMenu.add("Show Orders", ()-> {
             printHR();
@@ -129,14 +133,14 @@ public class CommandLineInterface {
 
     private Product selectProduct() {
         CLIMenu<Product> menu = new CLIMenu<>("Select a product");
-        menu.add("Cancel", () -> null);
+        menu.add( makeReturnLabel("Cancel"), () -> null);
         shopService.foreachProduct(product -> menu.add("[%s] %s".formatted(product.id(), product.name()), () -> product));
         return menu.show();
     }
 
     private Order selectOrder() {
         CLIMenu<Order> menu = new CLIMenu<>("Select an order");
-        menu.add("Cancel", () -> null);
+        menu.add( makeReturnLabel("Cancel"), () -> null);
         shopService.foreachOrder(order -> menu.add("[%s] %d product(s)".formatted(order.orderNumber(), order.products().size()), () -> order));
         return menu.show();
     }
@@ -144,7 +148,7 @@ public class CommandLineInterface {
     private void fillProductMenu() {
         productMenu.clear();
 
-        productMenu.add("Return to Main Menu", ()->mainMenu);
+        productMenu.add( makeReturnLabel("Return to Main Menu"), ()->mainMenu);
 
         productMenu.add("Show Products", ()-> {
             printHR();
