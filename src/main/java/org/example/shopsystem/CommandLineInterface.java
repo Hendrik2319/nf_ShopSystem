@@ -79,6 +79,12 @@ public class CommandLineInterface {
             return mainMenu;
         });
 
+        mainMenu.add("Show Terminal Colors", ()-> {
+            printHR();
+            TextColor.testValues();
+            System.out.println();
+            return mainMenu;
+        });
         mainMenu.add("-> Product Management", ()->productMenu);
         mainMenu.add("-> Order Management", ()->orderMenu);
     }
