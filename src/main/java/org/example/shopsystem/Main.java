@@ -1,5 +1,11 @@
 package org.example.shopsystem;
 
+import org.example.shopsystem.cli.CommandLineInterface;
+import org.example.shopsystem.orders.OrderMapRepo;
+import org.example.shopsystem.orders.OrderRepoInterface;
+import org.example.shopsystem.products.Product;
+import org.example.shopsystem.products.ProductRepo;
+
 import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;

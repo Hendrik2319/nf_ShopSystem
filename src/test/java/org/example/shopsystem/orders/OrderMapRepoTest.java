@@ -1,5 +1,6 @@
-package org.example.shopsystem;
+package org.example.shopsystem.orders;
 
+import org.example.shopsystem.products.Product;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;

@@ -1,19 +1,11 @@
-package org.example.shopsystem;
+package org.example.shopsystem.orders;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("EmptyMethod")
-class ProductRepoTest {
-
-    @Test
-    void generateNewProductID() {
-    }
-
-    @Test
-    void getProduct() {
-    }
+class OrderTest {
 
     @Test
     void addProduct() {
@@ -21,5 +13,13 @@ class ProductRepoTest {
 
     @Test
     void removeProduct() {
+    }
+
+    @Test
+    void getTotalPrice() {
+    }
+
+    @Test
+    void isEmpty() {
     }
 }

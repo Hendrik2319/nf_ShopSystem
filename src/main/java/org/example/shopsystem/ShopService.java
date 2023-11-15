@@ -1,5 +1,9 @@
 package org.example.shopsystem;
 
+import org.example.shopsystem.orders.Order;
+import org.example.shopsystem.orders.OrderRepoInterface;
+import org.example.shopsystem.products.Product;
+import org.example.shopsystem.products.ProductRepo;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

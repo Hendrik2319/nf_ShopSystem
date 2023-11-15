@@ -1,5 +1,7 @@
-package org.example.shopsystem;
+package org.example.shopsystem.products;
 
+import org.example.shopsystem.Displayable;
+import org.example.shopsystem.Main;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;

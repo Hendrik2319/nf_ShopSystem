@@ -1,5 +1,6 @@
-package org.example.shopsystem;
+package org.example.shopsystem.products;
 
+import org.example.shopsystem.Displayable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;

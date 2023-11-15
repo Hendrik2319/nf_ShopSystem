@@ -1,11 +1,11 @@
-package org.example.shopsystem;
+package org.example.shopsystem.cli;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import static org.example.shopsystem.CommandLineInterface.printHR;
+import static org.example.shopsystem.cli.CommandLineInterface.printHR;
 
 class CLIMenu<ReturnValue> {
 

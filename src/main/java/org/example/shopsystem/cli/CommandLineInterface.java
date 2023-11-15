@@ -1,4 +1,8 @@
-package org.example.shopsystem;
+package org.example.shopsystem.cli;
+
+import org.example.shopsystem.orders.Order;
+import org.example.shopsystem.products.Product;
+import org.example.shopsystem.ShopService;
 
 import java.util.List;
 import java.util.Scanner;

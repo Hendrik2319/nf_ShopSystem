@@ -1,4 +1,4 @@
-package org.example.shopsystem;
+package org.example.shopsystem.cli;
 
 public enum TextColor {
     RESET       (0),

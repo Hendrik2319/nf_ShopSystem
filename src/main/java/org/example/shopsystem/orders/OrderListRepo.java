@@ -1,4 +1,4 @@
-package org.example.shopsystem;
+package org.example.shopsystem.orders;
 
 import org.jetbrains.annotations.NotNull;
 
